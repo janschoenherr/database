@@ -17,11 +17,18 @@ steps:
   - name: composer-cache
     path: /tmp/composer-cache
 
-- name: phpcs
+- name: phpcs (loose)
   image: joomlaprojects/docker-images:php7.4
   commands:
   - vendor/bin/phpcs --config-set installed_paths vendor/joomla/coding-standards
   - vendor/bin/phpcs -p --report=full --extensions=php --standard=ruleset.xml src/
+
+- name: phpcs (strict)
+  image: joomlaprojects/docker-images:php7.4
+  commands:
+  - vendor/bin/phpcs --config-set installed_paths vendor/joomla/coding-standards
+  - vendor/bin/phpcs -p --report=full --extensions=php --standard=Joomla src/
+  failure: ignore
 
 - name: phpmd
   image: joomlaprojects/docker-images:php7.4
@@ -312,6 +319,6 @@ volumes:
 
 ---
 kind: signature
-hmac: 1940967873af191b337cdeb32362cecf3e394e7577cca47b0e83ab14fee8089d
+hmac: e7e8ef89a554fcbdac44e3e83d6663bb8bb61b0b5357ddd87838e6793d792485
 
 ...
