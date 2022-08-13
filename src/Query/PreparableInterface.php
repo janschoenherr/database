@@ -7,6 +7,7 @@
  * @license    GNU General Public License version 2 or later; see LICENSE
  */
 
+// phpcs:ignoreFile
 namespace Joomla\Database\Query;
 
 use Joomla\Database\ParameterType;
@@ -61,7 +62,9 @@ interface PreparableInterface
     public function unbind($key);
 
     /**
-     * Retrieves the bound parameters array when key is null and returns it by reference. If a key is provided then that item is returned.
+     * Retrieves the bound parameters array when key is null and returns it by reference.
+     *
+     * If a key is provided then that item is returned.
      *
      * @param   mixed  $key  The bounded variable key to retrieve.
      *
@@ -69,5 +72,5 @@ interface PreparableInterface
      *
      * @since   1.0
      */
-    public function &\getBounded($key = null);
+    public function &getBounded($key = null);
 }

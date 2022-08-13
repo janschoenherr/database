@@ -433,14 +433,13 @@ class MysqlDriver extends PdoDriver implements UTF8MB4SupportInterface
         // Set the query to get the table fields statement.
         $fields = $this->setQuery('SHOW FULL COLUMNS FROM ' . $this->quoteName($table))->loadObjectList();
 
-        // If we only want the type as the value add just that to the list.
         if ($typeOnly) {
+            // Wwe only want the type as the value add just that to the list.
             foreach ($fields as $field) {
                 $result[$field->Field] = \preg_replace('/[(0-9)]/', '', $field->Type);
             }
-        }
-        // If we want the whole field data object add that to the list.
-        else {
+        } else {
+            // We want the whole field data object add that to the list.
             foreach ($fields as $field) {
                 $result[$field->Field] = $field;
             }

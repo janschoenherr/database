@@ -9,6 +9,8 @@
 
 namespace Joomla\Database;
 
+use Joomla\Database\Exception\UnsupportedAdapterException;
+
 /**
  * Joomla Framework Database Factory class
  *
@@ -43,7 +45,7 @@ class DatabaseFactory
 
         // If the class still doesn't exist we have nothing left to do but throw an exception.  We did our best.
         if (!\class_exists($class)) {
-            throw new Exception\UnsupportedAdapterException(\sprintf('Unable to load Database Driver: %s', $options['driver']));
+            throw new UnsupportedAdapterException(\sprintf('Unable to load Database Driver: %s', $options['driver']));
         }
 
         return new $class($options);
@@ -68,7 +70,7 @@ class DatabaseFactory
         // Make sure we have an exporter class for this driver.
         if (!\class_exists($class)) {
             // If it doesn't exist we are at an impasse so throw an exception.
-            throw new Exception\UnsupportedAdapterException('Database Exporter not found.');
+            throw new UnsupportedAdapterException('Database Exporter not found.');
         }
 
         /** @var $o DatabaseExporter */
@@ -100,7 +102,7 @@ class DatabaseFactory
         // Make sure we have an importer class for this driver.
         if (!\class_exists($class)) {
             // If it doesn't exist we are at an impasse so throw an exception.
-            throw new Exception\UnsupportedAdapterException('Database importer not found.');
+            throw new UnsupportedAdapterException('Database importer not found.');
         }
 
         /** @var $o DatabaseImporter */
@@ -163,7 +165,7 @@ class DatabaseFactory
         // Make sure we have a query class for this driver.
         if (!\class_exists($class)) {
             // If it doesn't exist we are at an impasse so throw an exception.
-            throw new Exception\UnsupportedAdapterException('Database Query class not found');
+            throw new UnsupportedAdapterException('Database Query class not found');
         }
 
         return new $class($db);

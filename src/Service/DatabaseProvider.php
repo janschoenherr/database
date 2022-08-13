@@ -9,6 +9,7 @@
 
 namespace Joomla\Database\Service;
 
+use Joomla\Registry\Registry;
 use Joomla\Database\DatabaseDriver;
 use Joomla\Database\DatabaseFactory;
 use Joomla\Database\DatabaseInterface;
@@ -37,7 +38,7 @@ class DatabaseProvider implements ServiceProviderInterface
             ->share(
                 DatabaseDriver::class,
                 function (Container $container) {
-                    /** @var \Joomla\Registry\Registry $config */
+                    /** @var Registry $config */
                     $config  = $container->get('config');
                     $options = (array) $config->get('database');
 
