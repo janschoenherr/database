@@ -22,7 +22,7 @@ class DatabaseAwareTraitTest extends TestCase
 	protected $object;
 
 	/**
-	 * @testdox  Database can be set with setDatabase()
+	 * @testdox  Database can be set with \setDatabase()
 	 *
 	 * @covers   \Joomla\Database\DatabaseAwareTrait
 	 * @uses     \Joomla\Database\Database
@@ -46,7 +46,7 @@ class DatabaseAwareTraitTest extends TestCase
 	}
 
 	/**
-	 * @testdox  getDatabase() throws an DatabaseNotFoundException, if no database is set
+	 * @testdox  \getDatabase() throws an DatabaseNotFoundException, if no database is set
 	 *
 	 * @covers   \Joomla\Database\DatabaseAwareTrait
 	 */

@@ -288,7 +288,7 @@ class DatabaseQueryTest extends TestCase
 	}
 
 	/**
-	 * @testdox  A SQL statement for the MySQL find_in_set() function is generated
+	 * @testdox  A SQL statement for the MySQL \find_in_set() function is generated
 	 */
 	public function testFindInSet()
 	{
@@ -1029,7 +1029,7 @@ class DatabaseQueryTest extends TestCase
 	}
 
 	/**
-	 * @testdox bind() does not rely on index sequence
+	 * @testdox \bind() does not rely on index sequence
 	 */
 	public function testBindIndexSequence()
 	{
@@ -1038,7 +1038,7 @@ class DatabaseQueryTest extends TestCase
 		$values = ['foo', 'bar', 'baz'];
 		unset($values[1]);
 
-		$this->assertEquals([0, 2], array_keys($values));
+		$this->assertEquals([0, 2], \array_keys($values));
 
 		$this->query->bind($keys, $values, ParameterType::STRING);
 
@@ -1052,7 +1052,7 @@ class DatabaseQueryTest extends TestCase
 	}
 
 	/**
-	 * @testdox bind() accepts associated value arrays
+	 * @testdox \bind() accepts associated value arrays
 	 */
 	public function testBindAssoc()
 	{
@@ -1171,7 +1171,7 @@ class DatabaseQueryTest extends TestCase
 			->order(['a.id ASC'])
 			->setLimit(10, 1);
 
-		$expected = PHP_EOL . 'SELECT a.*,COUNT(b.a_id) AS b_things';
+		$expected = PHP_EOL . 'SELECT a.*,\COUNT(b.a_id) AS b_things';
 		$expected .= PHP_EOL . 'FROM foo a';
 		$expected .= PHP_EOL . 'LEFT JOIN bar b ON a.id = b.a_id';
 		$expected .= PHP_EOL . 'WHERE a.created IS NULL';
@@ -1206,7 +1206,7 @@ class DatabaseQueryTest extends TestCase
 			->alias('sub');
 
 		$expected = '(';
-		$expected .= PHP_EOL . 'SELECT a.*,COUNT(b.a_id) AS b_things';
+		$expected .= PHP_EOL . 'SELECT a.*,\COUNT(b.a_id) AS b_things';
 		$expected .= PHP_EOL . 'FROM foo a';
 		$expected .= PHP_EOL . 'LEFT JOIN bar b ON a.id = b.a_id) AS sub';
 
@@ -1269,7 +1269,7 @@ class DatabaseQueryTest extends TestCase
 
 		$expected = PHP_EOL . 'UPDATE foo a';
 		$expected .= PHP_EOL . 'LEFT JOIN bar b ON a.id = b.a_id';
-		$expected .= PHP_EOL . 'SET a.updated = CURRENT_TIMESTAMP()';
+		$expected .= PHP_EOL . 'SET a.updated = \CURRENT_TIMESTAMP()';
 		$expected .= PHP_EOL . 'WHERE b.id IN (:preparedArray1,:preparedArray2,:preparedArray3)';
 
 		$this->assertSame($expected, (string) $query);
@@ -1300,12 +1300,12 @@ class DatabaseQueryTest extends TestCase
 		};
 
 		$query->insert('foo a')
-			->set('a.data = ' . $query->quote(json_encode(['hello' => 'world'])))
+			->set('a.data = ' . $query->quote(\json_encode(['hello' => 'world'])))
 			->set('a.updated = ' . $query->currentTimestamp());
 
 		$expected = PHP_EOL . 'INSERT INTO foo a';
 		$expected .= PHP_EOL . 'SET a.data = \'{"hello":"world"}\'';
-		$expected .= PHP_EOL . "\t, a.updated = CURRENT_TIMESTAMP()";
+		$expected .= PHP_EOL . "\t, a.updated = \CURRENT_TIMESTAMP()";
 
 		$this->assertSame($expected, (string) $query);
 	}
@@ -1336,12 +1336,12 @@ class DatabaseQueryTest extends TestCase
 
 		$query->insert('foo a')
 			->columns(['a.data', 'a.updated'])
-			->values([$query->quote(json_encode(['hello' => 'world'])) . ', ' . $query->currentTimestamp()]);
+			->values([$query->quote(\json_encode(['hello' => 'world'])) . ', ' . $query->currentTimestamp()]);
 
 		// There is an expected trailing whitespace after the VALUES statement
 		$expected = PHP_EOL . 'INSERT INTO foo a';
 		$expected .= PHP_EOL . '(a.data,a.updated) VALUES ';
-		$expected .= PHP_EOL . '(\'{"hello":"world"}\', CURRENT_TIMESTAMP())';
+		$expected .= PHP_EOL . '(\'{"hello":"world"}\', \CURRENT_TIMESTAMP())';
 
 		$this->assertSame($expected, (string) $query);
 	}

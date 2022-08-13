@@ -57,7 +57,7 @@ class MysqlDriverTest extends AbstractDatabaseDriverTestCase
 
 		try
 		{
-			foreach (DatabaseDriver::splitSql(file_get_contents(dirname(__DIR__) . '/Stubs/Schema/mysql.sql')) as $query)
+			foreach (DatabaseDriver::splitSql(\file_get_contents(\dirname(__DIR__) . '/Stubs/Schema/mysql.sql')) as $query)
 			{
 				static::$connection->setQuery($query)
 					->execute();
@@ -104,8 +104,8 @@ class MysqlDriverTest extends AbstractDatabaseDriverTestCase
 			self::setUpBeforeClass();
 		}
 
-		$isMySQL8 = !static::$connection->isMariaDb() && version_compare(static::$connection->getVersion(), '8.0', '>=');
-		$useDisplayWidth = static::$connection->isMariaDb() || version_compare(static::$connection->getVersion(), '8.0.17', '<');
+		$isMySQL8 = !static::$connection->isMariaDb() && \version_compare(static::$connection->getVersion(), '8.0', '>=');
+		$useDisplayWidth = static::$connection->isMariaDb() || \version_compare(static::$connection->getVersion(), '8.0.17', '<');
 
 		yield 'only column types' => [
 			'#__dbtest',
@@ -214,7 +214,7 @@ class MysqlDriverTest extends AbstractDatabaseDriverTestCase
 	 */
 	public function dataQuoteBinary(): \Generator
 	{
-		yield ['DATA', "X'" . bin2hex('DATA') . "'"];
+		yield ['DATA', "X'" . \bin2hex('DATA') . "'"];
 		yield ["\x00\x01\x02\xff", "X'000102ff'"];
 		yield ["\x01\x01\x02\xff", "X'010102ff'"];
 	}
@@ -314,7 +314,7 @@ class MysqlDriverTest extends AbstractDatabaseDriverTestCase
 		];
 
 		// MySQL 8.0 adds additional data
-		if (!static::$connection->isMariaDb() && version_compare(static::$connection->getVersion(), '8.0', '>='))
+		if (!static::$connection->isMariaDb() && \version_compare(static::$connection->getVersion(), '8.0', '>='))
 		{
 			$dbtestPrimaryKey['Visible']    = 'YES';
 			$dbtestPrimaryKey['Expression'] = null;
@@ -513,7 +513,7 @@ class MysqlDriverTest extends AbstractDatabaseDriverTestCase
 		$result   = static::$connection->setQuery('SELECT @@SESSION.sql_mode;')->loadResult();
 		$expected = '0000-00-00 00:00:00';
 
-		if (strpos($result, 'NO_ZERO_DATE') !== false)
+		if (\strpos($result, 'NO_ZERO_DATE') !== false)
 		{
 			$expected = '1000-01-01 00:00:00';
 		}

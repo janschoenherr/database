@@ -67,7 +67,7 @@ class ExportCommandTest extends DatabaseTestCase
 
 		try
 		{
-			foreach (DatabaseDriver::splitSql(file_get_contents(dirname(__DIR__) . '/Stubs/Schema/mysql.sql')) as $query)
+			foreach (DatabaseDriver::splitSql(\file_get_contents(\dirname(__DIR__) . '/Stubs/Schema/mysql.sql')) as $query)
 			{
 				static::$connection->setQuery($query)
 					->execute();
@@ -83,12 +83,12 @@ class ExportCommandTest extends DatabaseTestCase
 			);
 		}
 
-		$this->umask    = umask(0);
-		$this->testPath = sys_get_temp_dir() . '/' . microtime(true) . '.' . mt_rand();
+		$this->umask    = \umask(0);
+		$this->testPath = \sys_get_temp_dir() . '/' . \microtime(true) . '.' . \mt_rand();
 
-		mkdir($this->testPath, 0777, true);
+		\mkdir($this->testPath, 0777, true);
 
-		$this->testPath = realpath($this->testPath);
+		$this->testPath = \realpath($this->testPath);
 	}
 
 	/**
@@ -101,7 +101,7 @@ class ExportCommandTest extends DatabaseTestCase
 	{
 		Folder::delete($this->testPath);
 
-		umask($this->umask);
+		\umask($this->umask);
 
 		foreach (static::$connection->getTableList() as $table)
 		{

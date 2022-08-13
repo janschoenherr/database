@@ -80,12 +80,12 @@ class MysqliQueryTest extends TestCase
 	}
 
 	/**
-	 * @testdox  A SQL statement for the MySQL find_in_set() function is generated
+	 * @testdox  A SQL statement for the MySQL \find_in_set() function is generated
 	 */
 	public function testFindInSet()
 	{
 		$this->assertSame(
-			' find_in_set(foo, a.data)',
+			' \find_in_set(foo, a.data)',
 			$this->query->findInSet('foo', 'a.data')
 		);
 	}
@@ -113,7 +113,7 @@ class MysqliQueryTest extends TestCase
 	public function testRand()
 	{
 		$this->assertSame(
-			' RAND() ',
+			' \RAND() ',
 			$this->query->rand()
 		);
 	}
@@ -143,7 +143,7 @@ class MysqliQueryTest extends TestCase
 	public function testCastAsWithCharAndLengthParam()
 	{
 		$this->assertSame(
-			'CAST(123 AS CHAR(2))',
+			'CAST(123 AS \CHAR(2))',
 			$this->query->castAs('CHAR', '123', 2)
 		);
 	}

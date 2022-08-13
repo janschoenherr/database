@@ -62,8 +62,8 @@ class PgsqlExporterTest extends TestCase
 					],
 					'title'       => (object) [
 						'column_name' => 'title',
-						'type'        => 'character varying(50)',
-						'Type'        => 'character varying(50)',
+						'type'        => 'character \varying(50)',
+						'Type'        => 'character \varying(50)',
 						'null'        => 'NO',
 						'Default'     => 'NULL',
 						'comments'    => '',
@@ -124,7 +124,7 @@ class PgsqlExporterTest extends TestCase
 			->method('quoteName')
 			->willReturnCallback(
 				function ($name, $as = null) {
-					if (is_string($name))
+					if (\is_string($name))
 					{
 						return '"' . $name . '"';
 					}
@@ -169,7 +169,7 @@ XML
     <table_structure name="#__dbtest">
      <sequence Column="id" Cycle_option="NO" Increment="1" Is_called="" Last_Value="" Max_Value="9223372036854775807" Min_Value="1" Name="#__dbtest_id_seq" Schema="public" Start_Value="1" Table="#__dbtest" Type="bigint"/>
      <field Comments="" Default="nextval('jos_dbtest_id_seq'::regclass)" Field="id" Null="NO" Type="integer"/>
-     <field Comments="" Default="NULL" Field="title" Null="NO" Type="character varying(50)"/>
+     <field Comments="" Default="NULL" Field="title" Null="NO" Type="character \varying(50)"/>
      <field Comments="" Default="NULL" Field="start_date" Null="NO" Type="timestamp without time zone"/>
      <field Comments="" Default="NULL" Field="description" Null="NO" Type="text"/>
      <key Index="#__dbtest_pkey" Key_name="" Query="ALTER TABLE &quot;jos_dbtest&quot; ADD PRIMARY KEY (id)" is_primary="TRUE" is_unique="TRUE"/>
@@ -211,7 +211,7 @@ XML
     <table_structure name="#__dbtest">
       <sequence Column="id" Cycle_option="NO" Increment="1" Is_called="" Last_Value="" Max_Value="9223372036854775807" Min_Value="1" Name="#__dbtest_id_seq" Schema="public" Start_Value="1" Table="#__dbtest" Type="bigint"/>
       <field Comments="" Default="nextval('jos_dbtest_id_seq'::regclass)" Field="id" Null="NO" Type="integer"/>
-      <field Comments="" Default="NULL" Field="title" Null="NO" Type="character varying(50)"/>
+      <field Comments="" Default="NULL" Field="title" Null="NO" Type="character \varying(50)"/>
       <field Comments="" Default="NULL" Field="start_date" Null="NO" Type="timestamp without time zone"/>
       <field Comments="" Default="NULL" Field="description" Null="NO" Type="text"/>
       <key Index="#__dbtest_pkey" Key_name="" Query="ALTER TABLE &quot;jos_dbtest&quot; ADD PRIMARY KEY (id)" is_primary="TRUE" is_unique="TRUE"/>

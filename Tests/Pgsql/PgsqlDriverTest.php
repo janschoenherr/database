@@ -86,8 +86,8 @@ class PgsqlDriverTest extends AbstractDatabaseDriverTestCase
 				'title'       => (object) [
 					'column_name' => 'title',
 					'Field'       => 'title',
-					'type'        => 'character varying(50)',
-					'Type'        => 'character varying(50)',
+					'type'        => 'character \varying(50)',
+					'Type'        => 'character \varying(50)',
 					'null'        => 'NO',
 					'Null'        => 'NO',
 					'Default'     => null,
@@ -314,7 +314,7 @@ class PgsqlDriverTest extends AbstractDatabaseDriverTestCase
 	{
 		$expectedResult = '';
 
-		if (\getenv('TRAVIS') === 'true' && in_array(\getenv('PGSQL_VERSION'), ['9.5', '9.6', '10.0']))
+		if (\getenv('TRAVIS') === 'true' && \in_array(\getenv('PGSQL_VERSION'), ['9.5', '9.6', '10.0']))
 		{
 			$expectedResult = 'TLSv1.2 (ECDHE-RSA-AES256-GCM-SHA384)';
 		}
@@ -374,7 +374,7 @@ class PgsqlDriverTest extends AbstractDatabaseDriverTestCase
 			'start_value'   => '1',
 		];
 
-		if (version_compare(static::$connection->getVersion(), '10', 'ge'))
+		if (\version_compare(static::$connection->getVersion(), '10', 'ge'))
 		{
 			$sequence['data_type']     = 'integer';
 			$sequence['maximum_value'] = '2147483647';

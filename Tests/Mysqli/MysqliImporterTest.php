@@ -155,7 +155,7 @@ class MysqliImporterTest extends TestCase
 			->method('quoteName')
 			->willReturnCallback(
 				function ($name, $as = null) {
-					if (is_string($name))
+					if (\is_string($name))
 					{
 						return "`$name`";
 					}
@@ -175,7 +175,7 @@ class MysqliImporterTest extends TestCase
 			->method('quote')
 			->willReturnCallback(
 				function ($text, $escape = true) {
-					if (is_string($text))
+					if (\is_string($text))
 					{
 						return "'$text'";
 					}
@@ -253,7 +253,7 @@ class MysqliImporterTest extends TestCase
 			false,
 			new \SimpleXMLElement('<dump><database name=""><table_structure name="#__dbtest">' . $idField . $titleField . $aliasField . $idKey . '</table_structure></database></dump>'),
 			[
-				"ALTER TABLE `jos_dbtest` ADD COLUMN `alias` varchar(255) NOT NULL DEFAULT ''",
+				"ALTER TABLE `jos_dbtest` ADD COLUMN `alias` \varchar(255) NOT NULL DEFAULT ''",
 			],
 			[],
 		];
@@ -293,7 +293,7 @@ class MysqliImporterTest extends TestCase
 			false,
 			new \SimpleXMLElement('<dump><database name=""><table_structure name="#__dbtest">' . $idField . $titleField . $idKey . '</table_structure><table_structure name="#__newtest">' . $idField . $titleField . $idKey . '</table_structure></database></dump>'),
 			[
-				"CREATE TABLE `#__newtest` (`id` int(11) unsigned NOT NULL DEFAULT '' AUTO_INCREMENT, `title` varchar(255) NOT NULL DEFAULT '', PRIMARY KEY  (`id`))",
+				"CREATE TABLE `#__newtest` (`id` \int(11) unsigned NOT NULL DEFAULT '' AUTO_INCREMENT, `title` \varchar(255) NOT NULL DEFAULT '', PRIMARY KEY  (`id`))",
 			],
 			[],
 		];
@@ -303,7 +303,7 @@ class MysqliImporterTest extends TestCase
 			false,
 			new \SimpleXMLElement('<dump><database name=""><table_structure name="#__dbtest"><field Field="id" Type="bigint() unsigned" Null="NO" Key="PRI" Default="" Extra="auto_increment" />' . $titleField . $idKey . '</table_structure></database></dump>'),
 			[
-				"ALTER TABLE `jos_dbtest` CHANGE COLUMN `id` `id` bigint() unsigned NOT NULL DEFAULT '' AUTO_INCREMENT",
+				"ALTER TABLE `jos_dbtest` CHANGE COLUMN `id` `id` \bigint() unsigned NOT NULL DEFAULT '' AUTO_INCREMENT",
 			],
 			[],
 		];

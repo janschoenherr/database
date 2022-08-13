@@ -45,7 +45,7 @@ class DebugMonitorTest extends TestCase
 		{
 			$this->monitor->startQuery("SELECT $i");
 
-			password_hash("password_hash_$i", PASSWORD_DEFAULT);
+			\password_hash("password_hash_$i", PASSWORD_DEFAULT);
 
 			$this->monitor->stopQuery();
 		}

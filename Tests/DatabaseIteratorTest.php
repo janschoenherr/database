@@ -102,7 +102,7 @@ class DatabaseIteratorTest extends TestCase
 
 		$iterator = new DatabaseIterator($statement);
 
-		$this->assertEquals($expected, iterator_to_array($iterator));
+		$this->assertEquals($expected, \iterator_to_array($iterator));
 	}
 
 	/**
@@ -161,7 +161,7 @@ class DatabaseIteratorTest extends TestCase
 			],
 		];
 
-		$this->assertEquals($expected, iterator_to_array($iterator));
+		$this->assertEquals($expected, \iterator_to_array($iterator));
 	}
 
 	/**
@@ -202,7 +202,7 @@ class DatabaseIteratorTest extends TestCase
 
 		$iterator = new DatabaseIterator($statement, null, TestEntity::class);
 
-		$this->assertEquals($expected, iterator_to_array($iterator));
+		$this->assertEquals($expected, \iterator_to_array($iterator));
 	}
 
 	/**

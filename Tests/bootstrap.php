@@ -10,13 +10,13 @@
  */
 if (!\defined('JPATH_ROOT'))
 {
-	define('JPATH_ROOT', realpath(dirname(__DIR__)));
+	\define('JPATH_ROOT', \realpath(\dirname(__DIR__)));
 }
 
 // Search for the Composer autoload file
-$composerAutoload = dirname(__DIR__) . '/vendor/autoload.php';
+$composerAutoload = \dirname(__DIR__) . '/vendor/autoload.php';
 
-if (file_exists($composerAutoload))
+if (\file_exists($composerAutoload))
 {
 	include_once $composerAutoload;
 }

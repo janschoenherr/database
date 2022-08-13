@@ -92,8 +92,8 @@ class PgsqlImporterTest extends TestCase
 					],
 					'title'       => (object) [
 						'column_name' => 'title',
-						'type'        => 'character varying(50)',
-						'Type'        => 'character varying(50)',
+						'type'        => 'character \varying(50)',
+						'Type'        => 'character \varying(50)',
 						'Null'        => 'NO',
 						'Default'     => 'NULL',
 						'comments'    => '',
@@ -161,7 +161,7 @@ class PgsqlImporterTest extends TestCase
 			->method('quoteName')
 			->willReturnCallback(
 				function ($name, $as = null) {
-					if (is_string($name))
+					if (\is_string($name))
 					{
 						return '"' . $name . '"';
 					}
@@ -181,7 +181,7 @@ class PgsqlImporterTest extends TestCase
 			->method('quote')
 			->willReturnCallback(
 				function ($text, $escape = true) {
-					if (is_string($text))
+					if (\is_string($text))
 					{
 						return "'$text'";
 					}
@@ -227,8 +227,8 @@ class PgsqlImporterTest extends TestCase
 		$idSequence = '<sequence Name="jos_dbtest_id_seq" Schema="public" Table="jos_dbtest" Column="id" Type="bigint" Start_Value="1" Min_Value="1" Max_Value="9223372036854775807" Increment="1" Cycle_option="NO" />';
 
 		$idField    = '<field Field="id" Type="integer" Null="NO" Default="nextval(\'jos_dbtest_id_seq\'::regclass)" Comments="" />';
-		$titleField = '<field Field="title" Type="character varying(50)" Null="NO" Default="NULL" Comments="" />';
-		$aliasField = '<field Field="alias" Type="character varying(255)" Null="NO" Default="test" Comments="" />';
+		$titleField = '<field Field="title" Type="character \varying(50)" Null="NO" Default="NULL" Comments="" />';
+		$aliasField = '<field Field="alias" Type="character \varying(255)" Null="NO" Default="test" Comments="" />';
 
 		$idKey    = '<key Index="jos_dbtest_pkey" is_primary="TRUE" is_unique="TRUE" Key_name="id" Query="ALTER TABLE jos_dbtest ADD PRIMARY KEY (id)" />';
 		$titleKey = '<key Index="jos_dbtest_idx_name" is_primary="FALSE" is_unique="FALSE" Key_name="name" Query="CREATE INDEX jos_dbtest_idx_name ON jos_dbtest USING btree (name)" />';
@@ -261,7 +261,7 @@ class PgsqlImporterTest extends TestCase
 			false,
 			new \SimpleXMLElement('<dump><database name=""><table_structure name="#__dbtest">' . $idSequence . $idField . $titleField . $aliasField . $idKey . '</table_structure></database></dump>'),
 			[
-				"ALTER TABLE \"jos_dbtest\" ADD COLUMN \"alias\" character varying(255) NOT NULL DEFAULT 'test'",
+				"ALTER TABLE \"jos_dbtest\" ADD COLUMN \"alias\" character \varying(255) NOT NULL DEFAULT 'test'",
 			],
 			[],
 		];
@@ -301,9 +301,9 @@ class PgsqlImporterTest extends TestCase
 			false,
 			new \SimpleXMLElement('<dump><database name=""><table_structure name="#__dbtest">' . $idSequence . $idField . $titleField . $idKey . '</table_structure><table_structure name="jos_newtest"><sequence Name="jos_newtest_id_seq" Schema="public" Table="jos_newtest" Column="id" Type="bigint" Start_Value="1" Min_Value="1" Max_Value="9223372036854775807" Increment="1" Cycle_option="NO" /><field Field="id" Type="integer" Null="NO" Default="nextval(\'jos_newtest_id_seq\'::regclass)" Comments="" />' . $titleField . '<key Index="jos_newtest_pkey" is_primary="TRUE" is_unique="TRUE" Key_name="id" Query="ALTER TABLE jos_newtest ADD PRIMARY KEY (id)" /></table_structure></database></dump>'),
 			[
-				'CREATE TABLE "jos_newtest" ("id" SERIAL, "title" character varying(50) NOT NULL DEFAULT \'NULL\')',
+				'CREATE TABLE "jos_newtest" ("id" SERIAL, "title" character \varying(50) NOT NULL DEFAULT \'NULL\')',
 				'CREATE SEQUENCE IF NOT EXISTS jos_newtest_id_seq INCREMENT BY 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 NO CYCLE OWNED BY "public.jos_newtest.id"',
-				"SELECT setval('jos_newtest_id_seq', , FALSE)",
+				"SELECT \setval('jos_newtest_id_seq', , FALSE)",
 				'ALTER TABLE jos_newtest ADD PRIMARY KEY (id)',
 			],
 			[],

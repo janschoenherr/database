@@ -67,7 +67,7 @@ class PgsqlQueryTest extends TestCase
 	public function testCastAsWithCharAndLengthParam()
 	{
 		$this->assertSame(
-			'CAST(foo AS CHAR(2))',
+			'CAST(foo AS \CHAR(2))',
 			$this->query->castAs('CHAR', 'foo', 2)
 		);
 	}
@@ -129,12 +129,12 @@ class PgsqlQueryTest extends TestCase
 	}
 
 	/**
-	 * @testdox  A SQL statement for the MySQL find_in_set() function is generated
+	 * @testdox  A SQL statement for the MySQL \find_in_set() function is generated
 	 */
 	public function testFindInSet()
 	{
 		$this->assertSame(
-			" foo = ANY (string_to_array(a.data, ',')::integer[]) ",
+			" foo = ANY (\string_to_array(a.data, ',')::integer[]) ",
 			$this->query->findInSet('foo', 'a.data')
 		);
 	}
@@ -257,7 +257,7 @@ class PgsqlQueryTest extends TestCase
 	public function testRand()
 	{
 		$this->assertSame(
-			' RANDOM() ',
+			' \RANDOM() ',
 			$this->query->rand()
 		);
 	}

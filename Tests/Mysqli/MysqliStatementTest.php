@@ -44,7 +44,7 @@ class MysqliStatementTest extends DatabaseTestCase
 
 		try
 		{
-			foreach (DatabaseDriver::splitSql(file_get_contents(dirname(__DIR__) . '/Stubs/Schema/mysql.sql')) as $query)
+			foreach (DatabaseDriver::splitSql(\file_get_contents(\dirname(__DIR__) . '/Stubs/Schema/mysql.sql')) as $query)
 			{
 				static::$connection->setQuery($query)
 					->execute();

@@ -44,7 +44,7 @@ class SqlsrvStatementTest extends DatabaseTestCase
 
 		try
 		{
-			foreach (DatabaseDriver::splitSql(file_get_contents(dirname(__DIR__) . '/Stubs/Schema/sqlsrv.sql')) as $query)
+			foreach (DatabaseDriver::splitSql(\file_get_contents(\dirname(__DIR__) . '/Stubs/Schema/sqlsrv.sql')) as $query)
 			{
 				static::$connection->setQuery($query)
 					->execute();

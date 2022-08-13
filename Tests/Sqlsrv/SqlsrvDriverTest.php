@@ -46,7 +46,7 @@ class SqlsrvDriverTest extends AbstractDatabaseDriverTestCase
 
 		try
 		{
-			foreach (DatabaseDriver::splitSql(file_get_contents(dirname(__DIR__) . '/Stubs/Schema/sqlsrv.sql')) as $query)
+			foreach (DatabaseDriver::splitSql(\file_get_contents(\dirname(__DIR__) . '/Stubs/Schema/sqlsrv.sql')) as $query)
 			{
 				static::$connection->setQuery($query)
 					->execute();
@@ -199,7 +199,7 @@ class SqlsrvDriverTest extends AbstractDatabaseDriverTestCase
 	 */
 	public function dataQuoteBinary(): \Generator
 	{
-		yield ['DATA', "0x" . bin2hex('DATA')];
+		yield ['DATA', "0x" . \bin2hex('DATA')];
 		yield ["\x00\x01\x02\xff", "0x000102ff"];
 		yield ["\x01\x01\x02\xff", "0x010102ff"];
 	}
@@ -511,7 +511,7 @@ class SqlsrvDriverTest extends AbstractDatabaseDriverTestCase
 	public function testGetConnection()
 	{
 		$this->assertTrue(
-			is_resource(static::$connection->getConnection())
+			\is_resource(static::$connection->getConnection())
 		);
 	}
 

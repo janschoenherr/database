@@ -47,7 +47,7 @@ class SqliteDriverTest extends AbstractDatabaseDriverTestCase
 
 		try
 		{
-			foreach (DatabaseDriver::splitSql(file_get_contents(dirname(__DIR__) . '/Stubs/Schema/sqlite.sql')) as $query)
+			foreach (DatabaseDriver::splitSql(\file_get_contents(\dirname(__DIR__) . '/Stubs/Schema/sqlite.sql')) as $query)
 			{
 				static::$connection->setQuery($query)
 					->execute();
@@ -71,7 +71,7 @@ class SqliteDriverTest extends AbstractDatabaseDriverTestCase
 	 */
 	protected function tearDown(): void
 	{
-		$tables = array_filter(
+		$tables = \array_filter(
 			static::$connection->getTableList(),
 			function (string $table): bool
 			{
@@ -183,7 +183,7 @@ class SqliteDriverTest extends AbstractDatabaseDriverTestCase
 	 */
 	public function dataQuoteBinary(): \Generator
 	{
-		yield ['DATA', "X'" . bin2hex('DATA') . "'"];
+		yield ['DATA', "X'" . \bin2hex('DATA') . "'"];
 		yield ["\x00\x01\x02\xff", "X'000102ff'"];
 		yield ["\x01\x01\x02\xff", "X'010102ff'"];
 	}

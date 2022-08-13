@@ -136,20 +136,20 @@ abstract class AbstractDatabaseDriverTestCase extends DatabaseTestCase
 	 */
 	public function testEscapeNonLocaleAware()
 	{
-		$origin = setlocale(LC_NUMERIC, 0);
+		$origin = \setlocale(LC_NUMERIC, 0);
 
 		// Test with decimal_point equals to comma
-		setlocale(LC_NUMERIC, 'pl_PL');
+		\setlocale(LC_NUMERIC, 'pl_PL');
 
 		$this->assertSame('3.14', static::$connection->escape(3.14));
 
 		// Test with C locale
-		setlocale(LC_NUMERIC, 'C');
+		\setlocale(LC_NUMERIC, 'C');
 
 		$this->assertSame('3.14', static::$connection->escape(3.14));
 
 		// Revert to origin locale
-		setlocale(LC_NUMERIC, $origin);
+		\setlocale(LC_NUMERIC, $origin);
 	}
 
 	/**
@@ -158,7 +158,7 @@ abstract class AbstractDatabaseDriverTestCase extends DatabaseTestCase
 	public function testGetCount()
 	{
 		$this->assertTrue(
-			is_int(static::$connection->getCount()),
+			\is_int(static::$connection->getCount()),
 			'The count of the number of executed SQL statements should be retrieved'
 		);
 	}
@@ -1007,7 +1007,7 @@ abstract class AbstractDatabaseDriverTestCase extends DatabaseTestCase
 
 		foreach (static::$connection->getMonitor()->getBoundParams() as $queryParams)
 		{
-			$params[] = array_column($queryParams, 'value');
+			$params[] = \array_column($queryParams, 'value');
 		}
 
 		$this->assertSame(

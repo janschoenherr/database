@@ -50,7 +50,7 @@ class SqlsrvQueryTest extends TestCase
 	 */
 	public function testCastAsChar()
 	{
-		$this->assertSame('CAST(foo as NVARCHAR(10))', $this->query->castAsChar('foo'));
+		$this->assertSame('CAST(foo as \NVARCHAR(10))', $this->query->castAsChar('foo'));
 	}
 
 	/**
@@ -58,7 +58,7 @@ class SqlsrvQueryTest extends TestCase
 	 */
 	public function testCastAsWithChar()
 	{
-		$this->assertSame('CAST(foo as NVARCHAR(10))', $this->query->castAs('CHAR', 'foo'));
+		$this->assertSame('CAST(foo as \NVARCHAR(10))', $this->query->castAs('CHAR', 'foo'));
 	}
 
 	/**
@@ -67,7 +67,7 @@ class SqlsrvQueryTest extends TestCase
 	public function testCastAsWithCharAndLengthParam()
 	{
 		$this->assertSame(
-			'CAST(foo as NVARCHAR(2))',
+			'CAST(foo as \NVARCHAR(2))',
 			$this->query->castAs('CHAR', 'foo', 2)
 		);
 	}
@@ -169,7 +169,7 @@ class SqlsrvQueryTest extends TestCase
 	}
 
 	/**
-	 * @testdox  A SQL statement for the MySQL find_in_set() function is generated
+	 * @testdox  A SQL statement for the MySQL \find_in_set() function is generated
 	 */
 	public function testFindInSet()
 	{
@@ -202,7 +202,7 @@ class SqlsrvQueryTest extends TestCase
 	public function testRand()
 	{
 		$this->assertSame(
-			' NEWID() ',
+			' \NEWID() ',
 			$this->query->rand()
 		);
 	}

@@ -153,7 +153,7 @@ class QueryElementTest extends TestCase
 	 *                        glue => glue
 	 * - array    $append     the element to be appended (same format as above)
 	 * - array    $expected   array of elements that should be the value of the elements attribute after the merge
-	 * - string   $string     value of __toString() for element after append
+	 * - string   $string     value of \__toString() for element after append
 	 *
 	 * @return  \Generator
 	 */

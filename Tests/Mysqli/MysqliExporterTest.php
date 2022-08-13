@@ -102,7 +102,7 @@ class MysqliExporterTest extends TestCase
 			->method('quoteName')
 			->willReturnCallback(
 				function ($name, $as = null) {
-					if (is_string($name))
+					if (\is_string($name))
 					{
 						return "`$name`";
 					}

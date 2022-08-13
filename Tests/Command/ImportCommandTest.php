@@ -56,7 +56,7 @@ class ImportCommandTest extends DatabaseTestCase
 	{
 		parent::setUp();
 
-		$this->stubPath = dirname(__DIR__) . '/Stubs/Importer';
+		$this->stubPath = \dirname(__DIR__) . '/Stubs/Importer';
 	}
 
 	/**
@@ -154,7 +154,7 @@ class ImportCommandTest extends DatabaseTestCase
 			[
 				'command'  => 'database:import',
 				'--table'  => 'unexisting_table',
-				'--folder' => dirname($this->stubPath),
+				'--folder' => \dirname($this->stubPath),
 			]
 		);
 		$output = new BufferedOutput;
